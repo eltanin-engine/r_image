@@ -1,4 +1,5 @@
 # r_image (Render Image)
+[![Build Status](https://travis-ci.org/lirith-engine/r_image.svg?branch=master)](https://travis-ci.org/lirith-engine/r_image)
 
 r_image is an image loading library made for loading images that can be within rendering contexts like textures.
 Currently supported image formats are:
