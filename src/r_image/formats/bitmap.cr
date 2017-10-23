@@ -37,12 +37,16 @@ module RImage
           @important_colors = file.read_bytes(Int32, IO::ByteFormat::LittleEndian)
         end
 
-        data_start = 54 #unless data_start > 0
-        @image_size = @width.not_nil! * @height.not_nil! * 3 if @image_size.nil? || @image_size == 0
+        data_start = 54 unless data_start > 0
+
+        if @image_size.nil? || @image_size == 0
+          row_size = ((@bits_per_pixel.to_i32 * width + 31) / 32) * 4
+          @image_size = row_size * height
+        end
 
         file.seek(data_start)
         @data = Bytes.new(image_size)
-        #file.read_fully(data)
+        file.read_fully(data)
 
         file.close
       end
