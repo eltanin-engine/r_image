@@ -5,7 +5,7 @@ module RImage
       getter reserved1 : Int16, reserved2 : Int16
       getter color_planes : Int16, bits_per_pixel : Int16
       getter compression = Compression::RGB
-      getter image_size : Int32?
+      getter! image_size : Int32
 
       getter x_px_per_m : Int32?, y_px_per_m : Int32?
       getter colors : Int32?
@@ -41,8 +41,8 @@ module RImage
         @image_size = @width.not_nil! * @height.not_nil! * 3 if @image_size.nil?
 
         file.seek(data_start)
-        @data = Bytes.new(@image_size.not_nil!)
-        file.read_fully(@data.not_nil!)
+        @data = Bytes.new(image_size)
+        file.read_fully(data)
 
         file.close
       end
