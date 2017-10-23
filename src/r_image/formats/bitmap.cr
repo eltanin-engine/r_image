@@ -38,7 +38,7 @@ module RImage
         end
 
         data_start = 54 unless data_start > 0 # Default
-        @image_size = @width.not_nil! * @height.not_nil! * 3 if @image_size.nil?
+        @image_size = @width.not_nil! * @height.not_nil! * 3 if @image_size.nil? || @image_size == 0
 
         file.seek(data_start)
         @data = Bytes.new(image_size)
